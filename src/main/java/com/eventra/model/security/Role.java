@@ -1,33 +1,43 @@
 package com.eventra.model.security;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.eventra.enums.RolesEnum;
+
 @Entity
-public class Role {
+public class Role implements Serializable {
+
+	private static final long serialVersionUID = -7802480923133846862L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
+	private int id;
 
 	private String name;
 
 	@OneToMany(mappedBy = "role", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private Set<UserRole> userRoles = new HashSet<>();
 
-	public Long getId() {
+	public Role() {
+	}
+
+	public Role(RolesEnum rolesEnum) {
+		this.id = rolesEnum.getId();
+		this.name = rolesEnum.getRoleName();
+	}
+
+	public int getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
@@ -51,7 +61,7 @@ public class Role {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + id;
 		return result;
 	}
 
@@ -64,10 +74,7 @@ public class Role {
 		if (!(obj instanceof Role))
 			return false;
 		Role other = (Role) obj;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
+		if (id != other.id)
 			return false;
 		return true;
 	}

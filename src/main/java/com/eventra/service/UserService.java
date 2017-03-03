@@ -29,11 +29,12 @@ public class UserService {
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
 
+	@Transactional
 	public User createUser(User user, Set<UserRole> userRoles) {
 		User localUser = userDao.findByUsername(user.getUsername());
 
 		if (localUser != null) {
-			LOG.info("User with username {} already exist. Nothing will be done. ", user.getUsername());
+			LOG.info("User with username {} already exist. Nothing will be done.", user.getUsername());
 		} else {
 			String encryptedPassword = passwordEncoder.encode(user.getPassword());
 			user.setPassword(encryptedPassword);
@@ -43,6 +44,8 @@ public class UserService {
 			}
 
 			user.getUserRoles().addAll(userRoles);
+
+			localUser = userDao.save(user);
 		}
 
 		return localUser;

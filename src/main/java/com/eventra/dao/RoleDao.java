@@ -1,9 +1,11 @@
 package com.eventra.dao;
 
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
 import com.eventra.model.security.Role;
 
-public interface RoleDao extends CrudRepository<Role, Long> {
+@Repository
+public interface RoleDao extends CrudRepository<Role, Integer> {
 
 }
