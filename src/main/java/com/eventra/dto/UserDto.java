@@ -5,31 +5,37 @@ import java.io.Serializable;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotBlank;
 
 public class UserDto implements Serializable {
 
 	private static final long serialVersionUID = 2224742635079161035L;
 
-	@NotNull
+	@NotNull(message = "Email is required")
+	@NotBlank(message = "Email is required")
 	@Email
 	private String username;
 
-	@NotNull
+	@NotNull(message = "Password is required")
+	@NotBlank(message = "Password is required")
 	private String password;
 
 	@NotNull
+	@NotBlank(message = "Confirm Password is required")
 	private String confirmPassword;
 
-	@NotNull
+	@NotNull(message = "First name is required")
+	@NotBlank(message = "First name is required")
 	private String firstName;
 
-	@NotNull
+	@NotNull(message = "Last name is required")
+	@NotBlank(message = "Last name is required")
 	private String lastName;
 
 	public String getUsername() {
 		return username;
 	}
-	
+
 	public void setUsername(String username) {
 		this.username = username;
 	}
