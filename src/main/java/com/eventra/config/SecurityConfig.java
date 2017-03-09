@@ -13,6 +13,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import com.eventra.controller.AttendanceController;
+import com.eventra.controller.ProgramController;
 import com.eventra.controller.SignupController;
 import com.eventra.service.UserSecurityService;
 
@@ -42,7 +43,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			"/error/**/*",
 			"/console/**",
 			SignupController.SIGNUP_URL_MAPPING,
-			AttendanceController.IMPORT_ATTENDANCE_URL_MAPPING	// TODO: Remove
+			AttendanceController.IMPORT_ATTENDANCE_URL_MAPPING,	// TODO: Remove
+			ProgramController.IMPORT_PROGRAM_URL_MAPPING	// TODO: Remove
 		};
 
 	@Override
