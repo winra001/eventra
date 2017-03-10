@@ -1,5 +1,6 @@
 package com.eventra.service;
 
+import java.util.List;
 import java.util.Set;
 
 import org.slf4j.Logger;
@@ -34,6 +35,10 @@ public class ProgramService {
 
 	public Program findById(Long id) {
 		return programDao.findOne(id);
+	}
+	
+	public List<Program> findAll() {
+		return (List<Program>) programDao.findAll();
 	}
 
 	@Transactional

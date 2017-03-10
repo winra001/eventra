@@ -32,7 +32,7 @@ public class ProgramController {
 
 	private static final Logger LOG = LoggerFactory.getLogger(ProgramController.class);
 
-	public static final String IMPORT_PROGRAM_URL_MAPPING = "/importProgram";
+	private static final String IMPORT_PROGRAM_URL_MAPPING = "/importProgram";
 
 	private static final String IMPORT_PROGRAM_VIEW_NAME = "program/importProgram";
 
@@ -40,13 +40,18 @@ public class ProgramController {
 
 	@Autowired
 	private PoiService poiService;
-	
+
 	@Autowired
 	private ProgramService programService;
 
-	@RequestMapping("/program")
-	public String programGet() {
-		return "program/programList";
+	/**
+	 * Fetches Program list
+	 */
+	@RequestMapping("/programs")
+	public String programGet(ModelMap model) {
+		List<Program> programs = programService.findAll();
+		model.addAttribute("programs", programs);
+		return "program/programs";
 	}
 
 	@RequestMapping(value = IMPORT_PROGRAM_URL_MAPPING, method = RequestMethod.GET)
@@ -54,6 +59,9 @@ public class ProgramController {
 		return IMPORT_PROGRAM_VIEW_NAME;
 	}
 
+	/**
+	 * Imports Program from Excel
+	 */
 	@RequestMapping(value = IMPORT_PROGRAM_URL_MAPPING, method = RequestMethod.POST)
 	public String importProgramPost(ModelMap model,
 									@RequestParam(name = "file", required = true) MultipartFile file) throws IOException {

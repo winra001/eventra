@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<!-- HTML page name and path :: Fragment name -->
+<!-- All locations are relative to the path: src/main/resources/templates -->
+<head th:replace="common/header :: common-header"></head>
+
+<body>
+	<div th:replace="common/navbar :: common-navbar"></div>
+
+	<!-- Error and Logout section -->
+	<div class="container">
+		<ul class="list-group">
+			<li class="list-group-item" th:each="program : ${programs}">
+				<span class="badge" th:text="${#dates.format(program.beginDate, 'HH:mm')}"></span>
+				<span class="badge badge-reverse">-</span>
+				<span class="badge" th:text="${#dates.format(program.endDate, 'HH:mm')}"></span>
+				<p th:text="${{program.title}}"></p>
+			</li>
+		</ul>
+	</div>
+
+	<!-- Bootstrap core JavaScript -->
+	<div th:replace="common/header :: before-body-scripts"></div>
+</body>
+</html>

@@ -12,8 +12,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import com.eventra.controller.AttendanceController;
-import com.eventra.controller.ProgramController;
 import com.eventra.controller.SignupController;
 import com.eventra.service.UserSecurityService;
 
@@ -42,9 +40,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			"/contact/**",
 			"/error/**/*",
 			"/console/**",
-			SignupController.SIGNUP_URL_MAPPING,
-			AttendanceController.IMPORT_ATTENDANCE_URL_MAPPING,	// TODO: Remove
-			ProgramController.IMPORT_PROGRAM_URL_MAPPING	// TODO: Remove
+			"/programs/**",
+			SignupController.SIGNUP_URL_MAPPING
 		};
 
 	@Override
@@ -54,7 +51,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.antMatchers(PUBLIC_MATCHERS).permitAll()
 			.anyRequest().authenticated()
 			.and()
-			.formLogin().loginPage("/login").defaultSuccessUrl("/program")
+			.formLogin().loginPage("/login").defaultSuccessUrl("/programs")
 			.failureUrl("/login?error").permitAll()
 			.and()
 			.logout().permitAll();

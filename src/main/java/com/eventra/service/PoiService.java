@@ -94,7 +94,15 @@ public class PoiService {
 	}
 
 	/**
-	 * Extract Program data from Excel
+	 * Extracts Program data from Excel
+	 * 0: Date
+	 * 1: Begin time
+	 * 2: End time
+	 * 3: Title
+	 * 4: Description
+	 * 5: Chair
+	 * 6: Venue
+	 * 7: Level
 	 */
 	public List<ProgramDto> extractProgram(MultipartFile file) {
 		InputStream is = null;
