@@ -8,16 +8,42 @@
 <body>
 	<div th:replace="common/navbar :: common-navbar"></div>
 
-	<!-- Error and Logout section -->
 	<div class="container">
-		<ul class="list-group">
-			<li class="list-group-item" th:each="program : ${programs}">
-				<span class="badge" th:text="${#dates.format(program.beginDate, 'HH:mm')}"></span>
-				<span class="badge badge-reverse">-</span>
-				<span class="badge" th:text="${#dates.format(program.endDate, 'HH:mm')}"></span>
-				<p th:text="${{program.title}}"></p>
-			</li>
-		</ul>
+		<div>
+			<!-- Nav tabs -->
+			<ul class="nav nav-tabs" role="tablist">
+				<li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Home</a></li>
+				<li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Profile</a></li>
+				<li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Messages</a></li>
+				<li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Settings</a></li>
+			</ul>
+
+			<!-- Tab panes -->
+			<div class="tab-content">
+				<div role="tabpanel" class="tab-pane active" id="home">AA</div>
+				<div role="tabpanel" class="tab-pane" id="profile">BB</div>
+				<div role="tabpanel" class="tab-pane" id="messages">CC</div>
+				<div role="tabpanel" class="tab-pane" id="settings">DD</div>
+			</div>
+		</div>
+
+		<div>
+			<!-- Nav tabs -->
+			<ul class="nav nav-pills nav-justified">
+				<li role="presentation" th:each="eventDate, iter : ${eventDates}">
+					<a th:href="|tab_${iter.index}|" th:text="${#dates.format(eventDate, 'dd/MM')}"></a>
+				</li>
+			</ul>
+			<!-- Tab panes -->
+			<ul class="list-group">
+				<li class="list-group-item" th:each="program : ${programs}">
+					<span class="badge" th:text="${#dates.format(program.beginDate, 'HH:mm')}"></span>
+					<span class="badge badge-reverse">-</span>
+					<span class="badge" th:text="${#dates.format(program.endDate, 'HH:mm')}"></span>
+					<p th:text="${{program.title}}"></p>
+				</li>
+			</ul>
+		</div>
 	</div>
 
 	<!-- Bootstrap core JavaScript -->

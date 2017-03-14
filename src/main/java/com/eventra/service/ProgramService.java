@@ -1,5 +1,6 @@
 package com.eventra.service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
@@ -39,6 +40,10 @@ public class ProgramService {
 	
 	public List<Program> findAll() {
 		return (List<Program>) programDao.findAll();
+	}
+	
+	public List<Date> findEventDates() {
+		return programDao.findEventDates();
 	}
 
 	@Transactional

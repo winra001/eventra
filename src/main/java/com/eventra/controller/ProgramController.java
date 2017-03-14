@@ -1,6 +1,7 @@
 package com.eventra.controller;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -49,7 +50,11 @@ public class ProgramController {
 	 */
 	@RequestMapping("/programs")
 	public String programGet(ModelMap model) {
+		List<Date> eventDates = programService.findEventDates();
+
 		List<Program> programs = programService.findAll();
+
+		model.addAttribute("eventDates", eventDates);
 		model.addAttribute("programs", programs);
 		return "program/programs";
 	}
