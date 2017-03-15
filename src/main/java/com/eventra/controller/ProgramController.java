@@ -51,7 +51,7 @@ public class ProgramController {
 	 * Fetches Program list
 	 */
 	@RequestMapping("/programs")
-	public String programGet(ModelMap model) {
+	public String programsGet(ModelMap model) {
 		Map<Date, List<Program>> programList = new HashMap<Date, List<Program>>();
 
 		List<Date> eventDates = programService.findEventDates();
@@ -66,7 +66,7 @@ public class ProgramController {
 	}
 
 	@RequestMapping(value = IMPORT_PROGRAM_URL_MAPPING, method = RequestMethod.GET)
-	public String importProgramGet(ModelMap model) {
+	public String importProgramsGet(ModelMap model) {
 		return IMPORT_PROGRAM_VIEW_NAME;
 	}
 
@@ -74,7 +74,7 @@ public class ProgramController {
 	 * Imports Program from Excel
 	 */
 	@RequestMapping(value = IMPORT_PROGRAM_URL_MAPPING, method = RequestMethod.POST)
-	public String importProgramPost(ModelMap model,
+	public String importProgramsPost(ModelMap model,
 									@RequestParam(name = "file", required = true) MultipartFile file) throws IOException {
 		if (file != null && !file.isEmpty()) {
 			List<ChairDto> chairDtoList = null;
