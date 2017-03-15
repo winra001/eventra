@@ -1,5 +1,6 @@
 package com.eventra.service;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
@@ -41,9 +42,18 @@ public class ProgramService {
 	public List<Program> findAll() {
 		return (List<Program>) programDao.findAll();
 	}
-	
+
 	public List<Date> findEventDates() {
 		return programDao.findEventDates();
+	}
+
+	public List<Program> findProgramsByBeginDate(Date eventDate) {
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(eventDate);
+		cal.add(Calendar.DATE, 1);
+		Date nextEventDate = cal.getTime();
+
+		return programDao.findProgramByBeginDate(eventDate, nextEventDate);
 	}
 
 	@Transactional

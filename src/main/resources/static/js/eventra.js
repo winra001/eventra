@@ -2,6 +2,13 @@ $(document).ready(main);
 
 function main() {
 
+	/* The Program list tabs */
+	$('#programListTabs a:first').tab('show');
+	$('#programListTabs a').click(function (e) {
+		e.preventDefault()
+		$(this).tab('show')
+	});
+
 	/* Signup form validation */
 	$('#signupForm').formValidation({
 		framework: 'bootstrap',

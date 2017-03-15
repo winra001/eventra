@@ -2,8 +2,10 @@ package com.eventra.controller;
 
 import java.io.IOException;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.slf4j.Logger;
@@ -50,12 +52,16 @@ public class ProgramController {
 	 */
 	@RequestMapping("/programs")
 	public String programGet(ModelMap model) {
-		List<Date> eventDates = programService.findEventDates();
+		Map<Date, List<Program>> programList = new HashMap<Date, List<Program>>();
 
-		List<Program> programs = programService.findAll();
+		List<Date> eventDates = programService.findEventDates();
+		for (Date eventDate : eventDates) {
+			List<Program> programs = programService.findProgramsByBeginDate(eventDate);
+			programList.put(eventDate, programs);
+		}
 
 		model.addAttribute("eventDates", eventDates);
-		model.addAttribute("programs", programs);
+		model.addAttribute("programList", programList);
 		return "program/programs";
 	}
 

@@ -15,4 +15,7 @@ public interface ProgramDao extends CrudRepository<Program, Long> {
 	@Query("SELECT DISTINCT(DATE(p.beginDate)) FROM Program p")
 	public List<Date> findEventDates();
 
+	@Query("SELECT p FROM Program p WHERE p.beginDate >= ?1 AND p.beginDate < ?2")
+	public List<Program> findProgramByBeginDate(Date beginDate, Date nextBeginDate);
+
 }
