@@ -31,6 +31,10 @@ public class PoiService {
 
 	/**
 	 * Extract Attendance from Excel
+	 * 
+	 * [0]: Full Name
+	 * [1]: Email
+	 * [2]: Reference
 	 */
 	public List<AttendanceDto> extractAttendance(MultipartFile file) {
 		InputStream is = null;
@@ -95,14 +99,15 @@ public class PoiService {
 
 	/**
 	 * Extracts Program data from Excel
-	 * 0: Date
-	 * 1: Begin time
-	 * 2: End time
-	 * 3: Title
-	 * 4: Description
-	 * 5: Chair
-	 * 6: Venue
-	 * 7: Level
+	 * 
+	 * [0]: Date
+	 * [1]: Begin time
+	 * [2]: End time
+	 * [3]: Title
+	 * [4]: Description
+	 * [5]: Chair
+	 * [6]: Venue
+	 * [7]: Level
 	 */
 	public List<ProgramDto> extractProgram(MultipartFile file) {
 		InputStream is = null;
