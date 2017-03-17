@@ -12,6 +12,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Venue implements Serializable {
 
@@ -23,6 +25,7 @@ public class Venue implements Serializable {
 
 	private String name;
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "venue", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private Set<ProgramVenue> programVenues = new HashSet<>();
 

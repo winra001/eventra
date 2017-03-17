@@ -20,11 +20,12 @@
 			<div class="tab-content">
 				<div role="tabpanel" class="tab-pane" th:id="|tab_${eventDate}|" th:each="eventDate, iter : ${eventDates}">
 					<ul class="list-group">
-						<li class="list-group-item" th:each="program : ${programList.get(eventDate)}">
-							<span class="badge" th:text="${#dates.format(program.beginDate, 'HH:mm')}"></span>
-							<span class="badge badge-reverse">-</span>
+						<li class="list-group-item" th:id="${program.id}" th:each="program : ${programList.get(eventDate)}">
 							<span class="badge" th:text="${#dates.format(program.endDate, 'HH:mm')}"></span>
-							<p th:text="${{program.title}}"></p>
+							<span class="badge badge-reverse">-</span>
+							<span class="badge" th:text="${#dates.format(program.beginDate, 'HH:mm')}"></span>
+							<!-- <a th:href="@{/program/__${program.id}__}" th:text="${program.title}"></a> -->
+							<p th:text="${program.title}"></p>
 						</li>
 					</ul>
 				</div>
@@ -34,5 +35,46 @@
 
 	<!-- Bootstrap core JavaScript -->
 	<div th:replace="common/header :: before-body-scripts"></div>
+	
+	<script type="text/javascript" th:inline="javascript">
+		$(document).ready(function() {
+			$('.list-group-item').click(function() {
+				var programId = $(this).attr('id');
+				var beginDate = $(this).find('span').eq(2).text();
+				var endDate = $(this).find('span').eq(0).text();
+				var message = '';
+				var title = '';
+
+				$.ajax({
+					url: '/program/' + programId,
+					type: 'GET',
+					dataType: 'JSON',
+					async: false,
+					contentType: "application/json;charset=utf-8",
+					success: function(program) {
+						// console.log(program);
+						// console.log(program.programVenues[0].venue);
+						title = program.title;
+						message = '<div>';
+						message += '<p>' + program.description + '</p>';
+						message += '</div>';
+					},
+					error: function(xhr, status, error) {
+						console.log(xhr.responseText);
+						console.log(status);
+						console.log(error);
+					}
+				});
+
+				BootstrapDialog.show({
+					type: BootstrapDialog.TYPE_PRIMARY,
+					size: BootstrapDialog.SIZE_LARGE,
+					title: title,
+					message: message,
+					draggable: false,
+				});
+			});
+		});
+	</script>
 </body>
 </html>

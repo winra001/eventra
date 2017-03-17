@@ -13,9 +13,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.eventra.dto.ChairDto;
@@ -47,6 +49,19 @@ public class ProgramController {
 	@Autowired
 	private ProgramService programService;
 
+	/**
+	 * Fetches Program
+	 * 
+	 * @param id
+	 *            The program id
+	 * @return Program
+	 */
+	@RequestMapping(value = "/program/{id}", method = RequestMethod.GET)
+	public @ResponseBody Program programGet(@PathVariable("id") Long id) {
+		Program program = programService.findById(id);
+		return program;
+	}
+	
 	/**
 	 * Fetches Program list
 	 */

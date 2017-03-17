@@ -12,6 +12,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Chair implements Serializable {
 
@@ -23,6 +25,7 @@ public class Chair implements Serializable {
 
 	private String name;
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "chair", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private Set<ProgramChair> programChairs = new HashSet<>();
 	

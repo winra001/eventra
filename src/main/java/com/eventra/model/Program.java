@@ -37,10 +37,10 @@ public class Program implements Serializable {
 	private int level;
 
 	@OneToMany(mappedBy = "program", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	private Set<ProgramVenue> programVenues = new HashSet<>();
+	private Set<ProgramVenue> programVenues = new HashSet<ProgramVenue>();
 
 	@OneToMany(mappedBy = "program", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	private Set<ProgramChair> programChairs = new HashSet<>();
+	private Set<ProgramChair> programChairs = new HashSet<ProgramChair>();
 
 	public long getId() {
 		return id;
@@ -143,10 +143,6 @@ public class Program implements Serializable {
 		builder.append(description);
 		builder.append(", level=");
 		builder.append(level);
-		builder.append(", programVenues=");
-		builder.append(programVenues);
-		builder.append(", programChairs=");
-		builder.append(programChairs);
 		builder.append("]");
 		return builder.toString();
 	}
